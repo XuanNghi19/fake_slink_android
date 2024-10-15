@@ -1,6 +1,6 @@
-package com.example.fake_slink.model
+package com.example.fake_slink.model.response
 
-data class Subject(
+data class SubjectResponse(
     var subjectID: Int,
 
     var idNum: String,

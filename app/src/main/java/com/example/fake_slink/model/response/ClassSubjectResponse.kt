@@ -1,16 +1,15 @@
-package com.example.fake_slink.model
+package com.example.fake_slink.model.response
 
-import androidx.core.view.ContentInfoCompat.Flags
 import java.util.Date
 
-data class ClassSubject(
+data class ClassSubjectResponse(
     var classSubjectID: Int,
 
-    var semester: Semester,
+    var semesterResponse: SemesterResponse,
 
-    var teacher: Teacher,
+    var teacherResponse: TeacherResponse,
 
-    var subject: Subject,
+    var subjectResponse: SubjectResponse,
 
     var location: String,
 

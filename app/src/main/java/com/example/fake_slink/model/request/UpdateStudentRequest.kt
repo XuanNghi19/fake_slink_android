@@ -1,10 +1,8 @@
-package com.example.fake_slink.model
+package com.example.fake_slink.model.request
 
 import java.util.Date
 
-data class Student(
-    var course: String,
-    var idNum: String,
+data class UpdateStudentRequest(
     var name: String,
     var dob: Date,
     var email: String,
@@ -12,6 +10,5 @@ data class Student(
     var phone1: String,
     var phone2: String,
     var sex: String,
-    var address: String,
-    var major: String
+    var address: String
 )
