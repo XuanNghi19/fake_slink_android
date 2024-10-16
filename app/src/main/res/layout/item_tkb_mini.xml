@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/list_tt">
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="26/08"
+        android:textColor="@color/red3"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rectangle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="|"
+        android:textSize="12sp"
+        android:fontFamily="@font/inter_medium"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@+id/day"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="13:00 -> 15:00"
+        android:textSize="12sp"
+        android:textColor="@color/gray_text"
+        app:layout_constraintStart_toEndOf="@+id/rectangle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/subject_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Xử lý ảnh và video"
+        android:textSize="13sp"
+        android:textColor="@color/blue_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/day" />
+
+    <ImageView
+        android:id="@+id/icon_subject_id"
+        android:layout_width="12dp"
+        android:layout_height="10.8dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/subject_id_num"
+        android:textColor="@color/blue_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subject_name" />
+    <TextView
+        android:id="@+id/text_subject_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="MUL14125"
+        android:textSize="11sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/icon_subject_id"
+        app:layout_constraintTop_toBottomOf="@+id/subject_name" />
+
+    <ImageView
+        android:id="@+id/icon_teacher"
+        android:layout_width="12dp"
+        android:layout_height="10.8dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/teacher"
+        android:textColor="@color/blue_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subject_name" />
+    <TextView
+        android:id="@+id/text_teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="Vũ Hữu Tiến"
+        android:textSize="11sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/icon_teacher"
+        app:layout_constraintTop_toBottomOf="@+id/subject_name" />
+
+    <ImageView
+        android:id="@+id/icon_location"
+        android:layout_width="8.6dp"
+        android:layout_height="10.33dp"
+        android:layout_marginStart="12.75dp"
+        android:layout_marginTop="8.6dp"
+        android:src="@drawable/location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_subject_id" />
+    <TextView
+        android:id="@+id/text_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7.75dp"
+        android:layout_marginTop="6.3dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="305-A2"
+        android:textSize="11sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/icon_location"
+        app:layout_constraintTop_toBottomOf="@+id/text_subject_id" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
