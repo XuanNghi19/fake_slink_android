@@ -14,6 +14,8 @@ import com.example.fake_slink.R
 import com.example.fake_slink.model.request.AuthenticationRequest
 import com.example.fake_slink.model.response.ApiResponse
 import com.example.fake_slink.model.response.AuthenticationResponse
+import com.example.fake_slink.model.response.StudentResponse
+import com.example.fake_slink.model.singleton.Student
 import com.example.fake_slink.retrofit.StudentApiService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -47,31 +49,81 @@ class LoginActivity : AppCompatActivity() {
 
             loadding.visibility = View.VISIBLE
 
-            val authenticationRequest = AuthenticationRequest(
-                idNum = student_id,
-                password = password
-            )
+            // getToken
+            authentication(student_id, password)
 
-            val TAG = "LOGIN"
-            StudentApiService.studentService.studentAuthentication(
-                authenticationRequest
-            ).enqueue(object: retrofit2.Callback<ApiResponse<AuthenticationResponse>> {
+            // getStudent detail
+            getStudentDetail()
+        }
+
+    }
+
+    private fun authentication(student_id: String, password: String) {
+        val authenticationRequest = AuthenticationRequest(
+            idNum = student_id,
+            password = password
+        )
+
+        val TAG = "LOGIN"
+        val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+        StudentApiService.studentService.studentAuthentication(
+            authenticationRequest
+        ).enqueue(object: retrofit2.Callback<ApiResponse<AuthenticationResponse>> {
+            override fun onResponse(
+                call: Call<ApiResponse<AuthenticationResponse>>,
+                response: Response<ApiResponse<AuthenticationResponse>>
+            ) {
+
+                if(response.isSuccessful) {
+                    val apiResponse = response.body()
+                    apiResponse?.let {
+                        val authenticationResponse = it.result
+                        val token = authenticationResponse.token
+                        Log.d(TAG,token)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("token", token)
+                        editor.apply()
+                    }
+                } else {
+                    loadding.visibility = View.GONE
+                    val errorMessage= response.message()
+                    Log.e(TAG, errorMessage)
+                }
+            }
+
+            override fun onFailure(
+                call: Call<ApiResponse<AuthenticationResponse>>,
+                t: Throwable
+            ) {
+                loadding.visibility = View.GONE
+                val errorMessage = t.message
+                Log.e(TAG, errorMessage.toString())
+                Toast.makeText(this@LoginActivity, "Có lỗi xảy ra: $errorMessage !", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun getStudentDetail() {
+        val TAG = "LOGIN"
+        val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+        val token = sharedPreferences.getString("token", null)
+        if(token != null) {
+            val authorizationHeader = "Bearer " + token
+            StudentApiService.studentService.getStudentDetail(
+                authorizationHeader
+            ).enqueue(object : retrofit2.Callback<ApiResponse<StudentResponse>> {
                 override fun onResponse(
-                    call: Call<ApiResponse<AuthenticationResponse>>,
-                    response: Response<ApiResponse<AuthenticationResponse>>
+                    call: Call<ApiResponse<StudentResponse>>,
+                    response: Response<ApiResponse<StudentResponse>>
                 ) {
                     loadding.visibility = View.GONE
-
                     if(response.isSuccessful) {
                         val apiResponse = response.body()
                         apiResponse?.let {
-                            val authenticationResponse = it.result
-                            val token = authenticationResponse.token
-                            Log.d(TAG,token)
-                            val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-                            val editor = sharedPreferences.edit()
-                            editor.putString("token", token)
-                            editor.apply()
+                            val studentResponse = it.result
+                            Log.d(TAG, "studentResponse: $studentResponse")
+
+                            Student.loginStudent(studentResponse)
 
                             val homeIntent = Intent(this@LoginActivity, HomeActivity::class.java)
                             startActivity(homeIntent)
@@ -84,10 +136,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(
-                    call: Call<ApiResponse<AuthenticationResponse>>,
-                    t: Throwable
-                ) {
+                override fun onFailure(call: Call<ApiResponse<StudentResponse>>, t: Throwable) {
                     loadding.visibility = View.GONE
                     val errorMessage = t.message
                     Log.e(TAG, errorMessage.toString())
@@ -95,6 +144,5 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
-
     }
 }

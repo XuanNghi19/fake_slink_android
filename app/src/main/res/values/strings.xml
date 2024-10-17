@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QLSV-PTIT</string>
+    <string name="mo_rong"><u>Mở rộng</u></string>
+    <string name="thu_gon"><u>Thu gọn</u></string>
 </resources>

@@ -23,5 +23,7 @@ data class StudentResponse(
 
     var address: String,
 
-    var major: String
+    var major: String,
+
+    var gpa: Float
 )
