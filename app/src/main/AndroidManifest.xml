@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Fake_Slink"
         tools:targetApi="31">
         <activity
+            android:name=".activities.StudentInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.HomeActivity"
             android:exported="false" />
         <activity

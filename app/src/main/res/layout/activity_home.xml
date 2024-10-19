@@ -319,7 +319,7 @@
         android:layout_width="38dp"
         android:layout_height="42dp"
         android:layout_marginTop="17dp"
-        android:src="@drawable/hoc_tap"
+        android:src="@drawable/hoc_tap_off"
         app:layout_constraintEnd_toStartOf="@id/tin_tuc"
         app:layout_constraintStart_toEndOf="@+id/trang_chu"
         app:layout_constraintTop_toTopOf="@+id/footer_bar"/>
@@ -329,7 +329,7 @@
         android:layout_width="60dp"
         android:layout_height="78dp"
         android:layout_marginTop="-17dp"
-        android:src="@drawable/tin_tuc"
+        android:src="@drawable/tin_tuc_off"
         app:layout_constraintStart_toStartOf="@+id/footer_bar"
         app:layout_constraintEnd_toEndOf="@+id/footer_bar"
         app:layout_constraintTop_toTopOf="@+id/footer_bar"/>
@@ -339,7 +339,7 @@
         android:layout_width="38dp"
         android:layout_height="42dp"
         android:layout_marginTop="17dp"
-        android:src="@drawable/tien_ich"
+        android:src="@drawable/tien_ich_off"
         app:layout_constraintStart_toEndOf="@+id/tin_tuc"
         app:layout_constraintEnd_toStartOf="@+id/ca_nhan"
         app:layout_constraintTop_toTopOf="@+id/footer_bar"/>
@@ -350,7 +350,7 @@
         android:layout_height="42dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="15dp"
-        android:src="@drawable/ca_nhan"
+        android:src="@drawable/ca_nhan_off"
         app:layout_constraintEnd_toEndOf="@+id/footer_bar"
         app:layout_constraintTop_toTopOf="@+id/footer_bar"/>
 

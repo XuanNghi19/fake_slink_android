@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
         val student = Student.getStudent()
         gpa_text_bar.text = String.format("%.2f", student?.gpa) + "/4"
         name_text_bar.text = student?.name
-        id_text_bar.text = student?.idNum
+        id_text_bar.text = "MSV: $student?.idNum"
     }
 
     private fun getMiniTkb() {

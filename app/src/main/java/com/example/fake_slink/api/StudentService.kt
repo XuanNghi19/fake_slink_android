@@ -4,6 +4,7 @@ import com.example.fake_slink.model.response.ApiResponse
 import com.example.fake_slink.model.request.AuthenticationRequest
 import com.example.fake_slink.model.request.UpdatePasswordRequest
 import com.example.fake_slink.model.request.UpdateStudentRequest
+import com.example.fake_slink.model.request.UploadAvatarRequest
 import com.example.fake_slink.model.response.AuthenticationResponse
 import com.example.fake_slink.model.response.StudentResponse
 import retrofit2.Call
@@ -39,5 +40,12 @@ interface StudentService {
     fun updatePassword(
         @Header("Authorization") authorizationHeader: String,
         @Body request: UpdatePasswordRequest
+    ): Call<ApiResponse<Boolean>>
+
+    // Cập nhật mật khẩu
+    @PATCH("students/upload_avatar_url")
+    fun updatePassword(
+        @Header("Authorization") authorizationHeader: String,
+        @Body request: UploadAvatarRequest
     ): Call<ApiResponse<Boolean>>
 }
