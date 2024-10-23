@@ -25,5 +25,7 @@ data class StudentResponse(
 
     var major: String,
 
-    var gpa: Float
+    var gpa: Float,
+
+    var avatarUrl: String
 )

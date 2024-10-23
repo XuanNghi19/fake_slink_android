@@ -79,4 +79,5 @@ dependencies {
     implementation(libs.converter.scalars)
     implementation(libs.converter.gson)
     implementation(libs.circleImageView)
+    implementation(libs.picasso)
 }

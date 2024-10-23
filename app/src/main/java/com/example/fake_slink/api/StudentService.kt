@@ -44,8 +44,8 @@ interface StudentService {
 
     // Cập nhật mật khẩu
     @PATCH("students/upload_avatar_url")
-    fun updatePassword(
+    suspend fun uploadAvatarUrl(
         @Header("Authorization") authorizationHeader: String,
         @Body request: UploadAvatarRequest
-    ): Call<ApiResponse<Boolean>>
+    ): ApiResponse<Boolean>
 }
