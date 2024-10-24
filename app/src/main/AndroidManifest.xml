@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Fake_Slink"
         tools:targetApi="31">
         <activity
+            android:name=".activities.TimeTableActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.InforActivity"
             android:exported="false" />
         <activity

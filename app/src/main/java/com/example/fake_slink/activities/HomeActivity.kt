@@ -25,6 +25,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.fake_slink.R
 import com.example.fake_slink.adapter.ItemTkbMiniAdapter
 import com.example.fake_slink.model.singleton.Student
+import com.example.fake_slink.model.singleton.TimeTables
 import com.example.fake_slink.retrofit.TimeTableApiService
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
@@ -44,6 +45,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var chuc_nang: TextView
     private lateinit var main_constraint: ConstraintLayout
     private lateinit var main_scroll_view: ScrollView
+    private lateinit var thoi_khoa_bieu: ImageView
     private var isOpen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +63,11 @@ class HomeActivity : AppCompatActivity() {
         chuc_nang = findViewById(R.id.chuc_nang)
         main_constraint = findViewById(R.id.main_contraint)
         main_scroll_view = findViewById(R.id.main_scroll_view)
+        thoi_khoa_bieu = findViewById(R.id.thoi_khoa_bieu)
+
+        thoi_khoa_bieu.setOnClickListener {
+            thoiKhoaBieu()
+        }
 
         tkb.visibility = View.GONE
         mo_rong.visibility = View.GONE
@@ -131,6 +138,8 @@ class HomeActivity : AppCompatActivity() {
                                 constraintSet.connect(chuc_nang.id, ConstraintSet.TOP, mo_rong.id, ConstraintSet.BOTTOM, 15.dpToPx(this@HomeActivity))
                                 constraintSet.applyTo(main_constraint)
                                 tkb.adapter = adapter
+
+                                TimeTables.loginTimeTables(listTimeTableResponse)
                             }
                         } ?: run {
                             val errorMessage = "No response body"
@@ -225,6 +234,11 @@ class HomeActivity : AppCompatActivity() {
     fun onCaNhanClick(view: View) {
         val studentInfoIntent = Intent(this@HomeActivity, StudentInfoActivity::class.java)
         startActivity(studentInfoIntent)
+    }
+
+    fun thoiKhoaBieu() {
+        val timeTableIntent = Intent(this@HomeActivity, TimeTableActivity::class.java)
+        startActivity(timeTableIntent)
     }
 }
 
