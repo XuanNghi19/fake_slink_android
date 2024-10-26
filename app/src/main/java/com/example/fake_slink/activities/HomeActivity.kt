@@ -32,6 +32,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
+import java.util.concurrent.TimeUnit
 
 class HomeActivity : AppCompatActivity() {
 
@@ -75,7 +77,13 @@ class HomeActivity : AppCompatActivity() {
         val constraintSet = ConstraintSet()
         constraintSet.clone(main_constraint)
 
-        constraintSet.connect(chuc_nang.id, ConstraintSet.TOP, load_tkb_mini.id, ConstraintSet.BOTTOM, 25.dpToPx(this))
+        constraintSet.connect(
+            chuc_nang.id,
+            ConstraintSet.TOP,
+            load_tkb_mini.id,
+            ConstraintSet.BOTTOM,
+            25.dpToPx(this)
+        )
         constraintSet.applyTo(main_constraint)
 
         setHeaderInformation()
@@ -117,41 +125,49 @@ class HomeActivity : AppCompatActivity() {
         if (idNum != null) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val apiResponse = TimeTableApiService.timeTableService.getTimeTable(
-                        authorizationStr,
-                        idNum
-                    )
-                    if (apiResponse.code == 200) {
-                        runOnUiThread {
-                            apiResponse.result?.let { listTimeTableResponse ->
-                                val adapter = ItemTkbMiniAdapter(
+                    withTimeout(TimeUnit.SECONDS.toMillis(10)) {
+                        val apiResponse = TimeTableApiService.timeTableService.getTimeTable(
+                            authorizationStr,
+                            idNum
+                        )
+                        if (apiResponse.code == 200) {
+                            runOnUiThread {
+                                apiResponse.result?.let { listTimeTableResponse ->
+                                    val adapter = ItemTkbMiniAdapter(
+                                        this@HomeActivity,
+                                        listTimeTableResponse
+                                    )
+                                    load_tkb_mini.visibility = View.GONE
+                                    tkb.visibility = View.VISIBLE
+                                    mo_rong.visibility = View.VISIBLE
+
+                                    val constraintSet = ConstraintSet()
+                                    constraintSet.clone(main_constraint)
+
+                                    constraintSet.connect(
+                                        chuc_nang.id,
+                                        ConstraintSet.TOP,
+                                        mo_rong.id,
+                                        ConstraintSet.BOTTOM,
+                                        15.dpToPx(this@HomeActivity)
+                                    )
+                                    constraintSet.applyTo(main_constraint)
+                                    tkb.adapter = adapter
+
+                                    TimeTables.loginTimeTables(listTimeTableResponse)
+                                }
+                            } ?: run {
+                                val errorMessage = "No response body"
+                                Log.e(TAG, errorMessage)
+                                Toast.makeText(
                                     this@HomeActivity,
-                                    listTimeTableResponse
-                                )
-                                load_tkb_mini.visibility = View.GONE
-                                tkb.visibility = View.VISIBLE
-                                mo_rong.visibility = View.VISIBLE
+                                    "Có lỗi xảy ra: $errorMessage !",
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                                val constraintSet = ConstraintSet()
-                                constraintSet.clone(main_constraint)
-
-                                constraintSet.connect(chuc_nang.id, ConstraintSet.TOP, mo_rong.id, ConstraintSet.BOTTOM, 15.dpToPx(this@HomeActivity))
-                                constraintSet.applyTo(main_constraint)
-                                tkb.adapter = adapter
-
-                                TimeTables.loginTimeTables(listTimeTableResponse)
                             }
-                        } ?: run {
-                            val errorMessage = "No response body"
-                            Log.e(TAG, errorMessage)
-                            Toast.makeText(
-                                this@HomeActivity,
-                                "Có lỗi xảy ra: $errorMessage !",
-                                Toast.LENGTH_SHORT
-                            ).show()
 
                         }
-
                     }
                 } catch (e: Exception) {
                     val errorMessage = e.message
@@ -170,8 +186,8 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setHomeOnClick() {
-        mo_rong.setOnClickListener{
-            if(isOpen) {
+        mo_rong.setOnClickListener {
+            if (isOpen) {
                 val layoutPrams = tkb.layoutParams
                 val heightInDp = 248
                 val scale = resources.displayMetrics.density
@@ -192,7 +208,7 @@ class HomeActivity : AppCompatActivity() {
                 spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, 0)
                 mo_rong.text = spannableString
 
-                main_scroll_view.post{
+                main_scroll_view.post {
                     main_scroll_view.smoothScrollTo(0, 0)
                 }
 
@@ -223,7 +239,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun Int.dpToPx(context: Context):Int {
+    private fun Int.dpToPx(context: Context): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             this.toFloat(),

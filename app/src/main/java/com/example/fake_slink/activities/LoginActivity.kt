@@ -19,6 +19,7 @@ import com.example.fake_slink.model.singleton.Student
 import com.example.fake_slink.retrofit.StudentApiService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.withTimeout
 import retrofit2.Call
 import retrofit2.Response
 
@@ -51,9 +52,6 @@ class LoginActivity : AppCompatActivity() {
 
             // getToken
             authentication(student_id, password)
-
-            // getStudent detail
-            getStudentDetail()
         }
 
     }
@@ -83,11 +81,14 @@ class LoginActivity : AppCompatActivity() {
                         val editor = sharedPreferences.edit()
                         editor.putString("token", token)
                         editor.apply()
+
+                        // getStudent detail
+                        getStudentDetail()
                     }
                 } else {
                     loadding.visibility = View.GONE
                     val errorMessage= response.message()
-                    Log.e(TAG, errorMessage)
+                    Log.e(TAG, "onResponse: ${errorMessage.toString()}")
                 }
             }
 
@@ -97,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 loadding.visibility = View.GONE
                 val errorMessage = t.message
-                Log.e(TAG, errorMessage.toString())
+                Log.e(TAG, "onFailure: ${errorMessage.toString()}")
                 Toast.makeText(this@LoginActivity, "Có lỗi xảy ra: $errorMessage !", Toast.LENGTH_SHORT).show()
             }
         })
@@ -109,40 +110,44 @@ class LoginActivity : AppCompatActivity() {
         val token = sharedPreferences.getString("token", null)
         if(token != null) {
             val authorizationHeader = "Bearer " + token
-            StudentApiService.studentService.getStudentDetail(
-                authorizationHeader
-            ).enqueue(object : retrofit2.Callback<ApiResponse<StudentResponse>> {
-                override fun onResponse(
-                    call: Call<ApiResponse<StudentResponse>>,
-                    response: Response<ApiResponse<StudentResponse>>
-                ) {
-                    loadding.visibility = View.GONE
-                    if(response.isSuccessful) {
-                        val apiResponse = response.body()
-                        apiResponse?.let {
-                            val studentResponse = it.result
-                            Log.d(TAG, "studentResponse: $studentResponse")
-
-                            Student.loginStudent(studentResponse)
-
-                            val homeIntent = Intent(this@LoginActivity, HomeActivity::class.java)
-                            startActivity(homeIntent)
-                            finish()
-                        }
-                    } else {
+            try {
+                StudentApiService.studentService.getStudentDetail(
+                    authorizationHeader
+                ).enqueue(object : retrofit2.Callback<ApiResponse<StudentResponse>> {
+                    override fun onResponse(
+                        call: Call<ApiResponse<StudentResponse>>,
+                        response: Response<ApiResponse<StudentResponse>>
+                    ) {
                         loadding.visibility = View.GONE
-                        val errorMessage= response.message()
-                        Log.e(TAG, errorMessage)
-                    }
-                }
+                        if(response.isSuccessful) {
+                            val apiResponse = response.body()
+                            apiResponse?.let {
+                                val studentResponse = it.result
+                                Log.d(TAG, "studentResponse: $studentResponse")
 
-                override fun onFailure(call: Call<ApiResponse<StudentResponse>>, t: Throwable) {
-                    loadding.visibility = View.GONE
-                    val errorMessage = t.message
-                    Log.e(TAG, errorMessage.toString())
-                    Toast.makeText(this@LoginActivity, "Có lỗi xảy ra: $errorMessage !", Toast.LENGTH_SHORT).show()
-                }
-            })
+                                Student.loginStudent(studentResponse)
+
+                                val homeIntent = Intent(this@LoginActivity, HomeActivity::class.java)
+                                startActivity(homeIntent)
+                                finish()
+                            }
+                        } else {
+                            loadding.visibility = View.GONE
+                            val errorMessage= response.message()
+                            Log.e(TAG, "getStudentDetail_else: $errorMessage")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ApiResponse<StudentResponse>>, t: Throwable) {
+                        loadding.visibility = View.GONE
+                        val errorMessage = t.message
+                        Log.e(TAG, "getStudentDetail_onFailure: ${errorMessage.toString()}")
+                        Toast.makeText(this@LoginActivity, "Có lỗi xảy ra: $errorMessage !", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            } catch (ex: Exception) {
+                Log.e(TAG, "getStudentDetail_catch: $ex")
+            }
         }
     }
 }

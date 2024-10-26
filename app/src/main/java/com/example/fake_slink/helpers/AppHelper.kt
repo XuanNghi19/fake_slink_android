@@ -11,6 +11,7 @@ class AppHelper {
             val calendar = Calendar.getInstance()
             val currentDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
             val delta = dayOfWeek - currentDayOfWeek + (weeksToAdd * 7)
+            if(delta < 0) return ""
             calendar.add(Calendar.DAY_OF_MONTH, delta)
 
             val dateFormat = SimpleDateFormat("dd/MM")

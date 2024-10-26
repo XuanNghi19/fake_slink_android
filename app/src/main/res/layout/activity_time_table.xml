@@ -21,12 +21,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/back"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="32dp"
         app:cardBackgroundColor="@color/red1"
-        android:onClick="onBackClick"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="@+id/header"
         app:layout_constraintTop_toTopOf="@+id/header">
@@ -65,6 +65,8 @@
         app:layout_constraintTop_toBottomOf="@+id/header">
         <AutoCompleteTextView
             android:id="@+id/dropdown_menu_tuan_hoc"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white" />

@@ -68,7 +68,7 @@ class ItemTkbMiniAdapter(
         while (dateTimeTablePair.size < 7) {
             for(timeTable in timetableList) {
                 val dateStr = AppHelper.getSpecificDate(timeTable.dayOfWeek, weekToAdd)
-
+                if(dateStr.equals("")) continue
                 val pair = DateTimeTablePair(dateStr, timeTable)
                 if(dateTimeTablePair.size < 7 &&
                     !dateTimeTablePair.any{it.dateStr == dateStr}) {
