@@ -16,6 +16,18 @@
         android:theme="@style/Theme.Fake_Slink"
         tools:targetApi="31">
         <activity
+            android:name=".activities.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.StudentsInClassActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ClassSubjectDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CreditClassActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.TimeTableActivity"
             android:exported="false" />
         <activity

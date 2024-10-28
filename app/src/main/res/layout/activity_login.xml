@@ -39,7 +39,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        app:startIconDrawable="@drawable/user"
+        app:startIconDrawable="@drawable/user_xml"
         android:hint="Mã sinh viên"
         app:layout_constraintTop_toBottomOf="@+id/slink"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_student_id"
-        app:startIconDrawable="@drawable/password">
+        app:startIconDrawable="@drawable/password_xml">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
@@ -76,7 +76,7 @@
             android:fontFamily="@font/inter_medium"
             android:paddingStart="48dp"
             android:inputType="textPassword"
-            android:textColor="@color/gray_text" />
+            android:textColor="@color/gray_text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
