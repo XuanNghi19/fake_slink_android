@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/red1"
     android:layout_width="match_parent"
+    android:background="@color/red1"
     android:layout_height="match_parent"
-    tools:context=".activities.NotificationActivity">
+    tools:context=".activities.StudyCornerActivity">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,35 +46,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
         android:fontFamily="@font/inter_bold"
-        android:text="Thông báo"
+        android:text="Góc học tập"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/header"
         app:layout_constraintStart_toStartOf="@+id/header"
         app:layout_constraintTop_toTopOf="@+id/header" />
-    <ImageButton
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/check_all"
-        android:layout_marginEnd="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/header_name"
-        app:layout_constraintTop_toTopOf="@id/header_name"
-        app:layout_constraintEnd_toEndOf="@id/header"/>
-    <ListView
-        android:id="@+id/list_notification"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="20dp"
-        android:divider="@color/blue_sky"
-        tools:listitem="@layout/item_list_notification"
-        android:scrollbars="none"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

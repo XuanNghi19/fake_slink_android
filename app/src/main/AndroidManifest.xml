@@ -16,6 +16,33 @@
         android:theme="@style/Theme.Fake_Slink"
         tools:targetApi="31">
         <activity
+            android:name=".activities.UtilitiesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.StudyCornerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ReviewFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ReviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GradeDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LearningOutcomesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ExamScheduleDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ExamScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.NotificationDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.NotificationActivity"
             android:exported="false" />
         <activity

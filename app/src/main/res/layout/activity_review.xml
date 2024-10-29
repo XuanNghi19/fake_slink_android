@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/red1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ReviewActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_sky" />
+
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/red1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="32dp"
+        app:cardBackgroundColor="@color/red1"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toTopOf="@+id/header">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/white_back" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/header_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Thắc mắc điểm"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toTopOf="@+id/header"/>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/no_review"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="132dp"
+            android:layout_height="133dp"
+            android:src="@drawable/empty"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trống"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:textColor="@color/gray_text"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="140dp"/>
+    </FrameLayout>
+
+    <TableLayout
+        android:id="@+id/table_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
+        <TableRow
+            android:background="@drawable/table_head">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Tên học phần"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/white"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Số tín chỉ"
+                android:maxLines="1"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/white"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Trạng thái"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:layout_weight="3"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/white"/>
+        </TableRow>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="400dp"
+            android:scrollbars="none"
+            android:id="@+id/exam_schedule_list"
+            tools:listitem="@layout/item_review_list"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_2"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </TableLayout>
+
+    <ImageButton
+        android:id="@+id/add_review"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:src="@drawable/add_review"
+        app:layout_constraintTop_toBottomOf="@+id/table_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

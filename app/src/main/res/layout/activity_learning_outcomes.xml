@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/red1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.LearningOutcomesActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_sky" />
+
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/red1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="32dp"
+        app:cardBackgroundColor="@color/red1"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toTopOf="@+id/header">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/white_back" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/header_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Kết quả học tập"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/header"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toTopOf="@+id/header" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/gpa"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Điểm tích lũy"
+            android:layout_marginStart="20dp"
+            android:layout_marginVertical="15dp"
+            android:fontFamily="@font/inter_medium"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="2.7"
+            android:textColor="@color/red1"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="end"
+            android:layout_marginVertical="15dp"
+            android:fontFamily="@font/inter_medium"/>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_hoc_ky"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Kỳ học"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gpa">
+
+        <AutoCompleteTextView
+            android:id="@+id/dropdown_ky_hoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TableLayout
+        android:id="@+id/table_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_hoc_ky">
+        <TableRow
+            android:background="@drawable/table_head">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Tên học phần"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/white"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Số tín chỉ"
+                android:maxLines="1"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/white"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Tổng kết điểm (dạng chữ)"
+                android:textSize="14sp"
+                android:gravity="center_horizontal"
+                android:layout_weight="3"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/white"/>
+        </TableRow>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="400dp"
+            android:scrollbars="none"
+            android:id="@+id/exam_schedule_list"
+            tools:listitem="@layout/item_list_kqht"
+            />
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
