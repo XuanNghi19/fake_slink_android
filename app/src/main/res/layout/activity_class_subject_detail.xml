@@ -74,7 +74,7 @@
                 android:maxLines="3"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -114,7 +114,7 @@
                 app:layout_constraintStart_toStartOf="parent"/>
             <TextView
                 android:id="@+id/subject_idNum"
-                android:fontFamily="@font/inter_bold"
+                android:fontFamily="@font/inter_medium"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:text="MUL4025"
@@ -136,7 +136,7 @@
                 app:layout_constraintStart_toStartOf="parent"/>
             <TextView
                 android:id="@+id/teacher_name"
-                android:fontFamily="@font/inter_bold"
+                android:fontFamily="@font/inter_medium"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:text="Hoàng Đăng Hải"
@@ -210,8 +210,7 @@
                 android:id="@+id/icon_people"
                 android:layout_width="25dp"
                 android:layout_height="26dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginVertical="15dp"
                 android:layout_marginStart="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -221,9 +220,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_semi_bold"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:text="Thông tin sinh viên"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/icon_people"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -256,8 +255,7 @@
                 android:id="@+id/icon_ket_qua_hoc_tap"
                 android:layout_width="25dp"
                 android:layout_height="26dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginVertical="15dp"
                 android:layout_marginStart="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -267,9 +265,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_semi_bold"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:text="Kết quả hoc tập"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/icon_ket_qua_hoc_tap"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>

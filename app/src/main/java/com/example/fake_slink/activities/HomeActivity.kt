@@ -48,6 +48,9 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var main_constraint: ConstraintLayout
     private lateinit var main_scroll_view: ScrollView
     private lateinit var thoi_khoa_bieu: ImageView
+    private lateinit var tin_tuc: ImageView
+    private lateinit var ket_qua_hoc_tap: ImageView
+    private lateinit var lop_tin_chi: ImageView
     private var isOpen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,11 +69,22 @@ class HomeActivity : AppCompatActivity() {
         main_constraint = findViewById(R.id.main_contraint)
         main_scroll_view = findViewById(R.id.main_scroll_view)
         thoi_khoa_bieu = findViewById(R.id.thoi_khoa_bieu)
+        tin_tuc = findViewById(R.id.tin_tuc)
+        ket_qua_hoc_tap = findViewById(R.id.ket_qua_hoc_tap)
+        lop_tin_chi = findViewById(R.id.lop_tin_chi)
 
         thoi_khoa_bieu.setOnClickListener {
             thoiKhoaBieu()
         }
-
+        lop_tin_chi.setOnClickListener {
+            lop_tin_chi()
+        }
+        ket_qua_hoc_tap.setOnClickListener {
+            ket_qua_hoc_tap()
+        }
+        tin_tuc.setOnClickListener {
+            tin_tuc()
+        }
         tkb.visibility = View.GONE
         mo_rong.visibility = View.GONE
 
@@ -110,7 +124,7 @@ class HomeActivity : AppCompatActivity() {
         Picasso.get()
             .load(student?.avatarUrl)
             .into(avatar_image)
-        gpa_text_bar.text = String.format("%.2f", student?.gpa) + "/4"
+        gpa_text_bar.text = student?.gpa.toString() + "/4"
         name_text_bar.text = student?.name
         id_text_bar.text = "MSV: ${student?.idNum}";
     }
@@ -252,9 +266,22 @@ class HomeActivity : AppCompatActivity() {
         startActivity(studentInfoIntent)
     }
 
-    fun thoiKhoaBieu() {
+    private fun thoiKhoaBieu() {
         val timeTableIntent = Intent(this@HomeActivity, TimeTableActivity::class.java)
         startActivity(timeTableIntent)
+    }
+
+    private fun lop_tin_chi() {
+        startActivity(Intent(this@HomeActivity, CreditClassActivity::class.java))
+    }
+
+    private fun ket_qua_hoc_tap() {
+        startActivity(Intent(this@HomeActivity, LearningOutcomesActivity::class.java))
+    }
+
+    private fun tin_tuc() {
+        val uri = Uri.parse("https://ptit.edu.vn/giao-vu")
+        startActivity(Intent(Intent.ACTION_VIEW, uri))
     }
 }
 

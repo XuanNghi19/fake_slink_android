@@ -17,5 +17,31 @@ class AppHelper {
             val dateFormat = SimpleDateFormat("dd/MM")
             return dateFormat.format(calendar.time)
         }
+        fun convertScoreToGrade(score: Float): String {
+            return when {
+                score >= 9.0 -> "A+"
+                score >= 8.5 -> "A"
+                score >= 8.0 -> "B+"
+                score >= 7.0 -> "B"
+                score >= 6.5 -> "C+"
+                score >= 5.5 -> "C"
+                score >= 5.0 -> "D+"
+                score >= 4.0 -> "D"
+                else -> "F"
+            }
+        }
+        fun convertScoreToGradeNum(score: Float): String {
+            return when {
+                score >= 9.0 -> "4.0"
+                score >= 8.5 -> "3.7"
+                score >= 8.0 -> "3.5"
+                score >= 7.0 -> "3.0"
+                score >= 6.5 -> "2.5"
+                score >= 5.5 -> "2.0"
+                score >= 5.0 -> "1.5"
+                score >= 4.0 -> "1"
+                else -> "F"
+            }
+        }
     }
 }

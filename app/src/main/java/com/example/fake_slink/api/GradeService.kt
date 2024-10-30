@@ -7,7 +7,7 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface GradeService {
-    @GET("students/{id_num}")
+    @GET("grade/{id_num}")
     suspend fun getLearningOutcomes(
         @Header("Authorization") authorizationHeader: String,
         @Path("id_num") idNum: String

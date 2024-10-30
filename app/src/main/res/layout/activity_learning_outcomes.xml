@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="@+id/header" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/gpa"
+        android:id="@+id/card_gpa"
         app:cardElevation="0dp"
         app:cardCornerRadius="5dp"
         android:layout_marginTop="20dp"
@@ -73,10 +73,11 @@
             android:layout_marginVertical="15dp"
             android:fontFamily="@font/inter_medium"/>
         <TextView
+            android:id="@+id/gpa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="2.7"
+            android:text="2.70"
             android:textColor="@color/red1"
             android:layout_marginEnd="20dp"
             android:layout_gravity="end"
@@ -94,7 +95,7 @@
         android:hint="Kỳ học"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gpa">
+        app:layout_constraintTop_toBottomOf="@+id/card_gpa">
 
         <AutoCompleteTextView
             android:id="@+id/dropdown_ky_hoc"
@@ -148,10 +149,13 @@
                 android:fontFamily="@font/inter_semi_bold"
                 android:textColor="@color/white"/>
         </TableRow>
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_marginTop="20dp"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_height="400dp"
             android:scrollbars="none"
-            android:id="@+id/exam_schedule_list"
+            android:id="@+id/recycler_kqht"
             tools:listitem="@layout/item_list_kqht"
             />
     </TableLayout>

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/red1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.StudentsInClassActivity">
@@ -54,7 +55,7 @@
         android:id="@+id/student_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="55 sinh viên"
+        android:text="0 sinh viên"
         android:textSize="16sp"
         android:textColor="@color/gray_text"
         android:layout_marginTop="15dp"
@@ -79,4 +80,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/student_num"
         app:layout_constraintBottom_toBottomOf="parent"/>
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/student_num"
+        android:layout_marginTop="20dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

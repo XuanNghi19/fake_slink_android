@@ -24,7 +24,12 @@ import com.example.fake_slink.R
 import com.example.fake_slink.model.request.UpdatePasswordRequest
 import com.example.fake_slink.model.request.UploadAvatarRequest
 import com.example.fake_slink.model.response.ApiResponse
+import com.example.fake_slink.model.singleton.ClassSubjectDetails
+import com.example.fake_slink.model.singleton.CreditClass
+import com.example.fake_slink.model.singleton.GradeDetail
+import com.example.fake_slink.model.singleton.LearningOutcomes
 import com.example.fake_slink.model.singleton.Student
+import com.example.fake_slink.model.singleton.TimeTables
 import com.example.fake_slink.retrofit.StudentApiService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -191,8 +196,13 @@ class StudentInfoActivity : AppCompatActivity() {
         // delete token
         edit.remove("token")
 
-        //delete student data
+        //delete data
         Student.logoutStudent()
+        TimeTables.logoutTimeTables()
+        LearningOutcomes.logout()
+        GradeDetail.logout()
+        CreditClass.logoutCreditClassResponse()
+        ClassSubjectDetails.logout()
 
         // chuyen den man hinh Login
         val loginIntent = Intent(this@StudentInfoActivity, LoginActivity::class.java)
