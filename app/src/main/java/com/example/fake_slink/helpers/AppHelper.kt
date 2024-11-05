@@ -1,9 +1,17 @@
 package com.example.fake_slink.helpers
 
+import android.content.ContentResolver
 import android.content.Context
+import android.database.Cursor
 import android.icu.util.Calendar
+import android.net.Uri
+import android.os.Build
+import android.provider.OpenableColumns
 import android.util.TypedValue
+import android.webkit.MimeTypeMap
+import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
+import java.util.UUID
 
 class AppHelper {
     companion object {
@@ -42,6 +50,36 @@ class AppHelper {
                 score >= 4.0 -> "1"
                 else -> "F"
             }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun getFileName(context: Context, uri: Uri): String? {
+            var name: String? = null
+            val contentResolver: ContentResolver = context.contentResolver
+
+            val cursor: Cursor? = contentResolver.query(uri, null, null, null)
+            cursor?.use {
+                if(it.moveToFirst()) {
+                    val nameIdx = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+
+                    if(nameIdx != -1) {
+                        name = it.getString(nameIdx)
+                    }
+                }
+            }
+
+            return name
+        }
+
+        fun getFileExtension(context: Context, uri: Uri): String? {
+            val contentResolver: ContentResolver = context.contentResolver
+            val mimeType = contentResolver.getType(uri)
+
+            return MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType)
+        }
+
+        fun generateUniqueStringUsingUUID(): String {
+            return UUID.randomUUID().toString()
         }
     }
 }

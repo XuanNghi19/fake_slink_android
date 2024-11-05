@@ -122,6 +122,8 @@ class LearningOutcomesActivity : AppCompatActivity() {
     private fun setData() {
         gpa.text = Student.getStudent()?.gpa.toString()
         val learningOutcomes = LearningOutcomes.get()
+
+        // select item semester with present time
         val now = Date()
         var currentSemesterIdx = learningOutcomes?.semesterResponseList?.indexOfFirst { semester ->
             now == semester.startDate || now == semester.endDate ||
@@ -156,7 +158,7 @@ class LearningOutcomesActivity : AppCompatActivity() {
                 // cuon den vi tri currentSemesterIdx
                 val adapterDropdownMenuSemester = dropdown_ky_hoc.adapter as ArrayAdapter<*>
                 val viewGroup = dropdown_ky_hoc.parent as ViewGroup
-                adapterDropdownMenuSemester.getView(currentSemesterIdx, null, viewGroup)?.let {
+                adapterDropdownMenuSemester.getView(currentSemesterIdx, null, viewGroup).let {
                     dropdown_ky_hoc.listSelection = currentSemesterIdx
                 }
             }

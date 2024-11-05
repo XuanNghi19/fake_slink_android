@@ -21,15 +21,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.fake_slink.R
+import com.example.fake_slink.helpers.AppHelper
 import com.example.fake_slink.model.request.UpdatePasswordRequest
 import com.example.fake_slink.model.request.UploadAvatarRequest
 import com.example.fake_slink.model.response.ApiResponse
 import com.example.fake_slink.model.singleton.ClassSubjectDetails
 import com.example.fake_slink.model.singleton.CreditClass
+import com.example.fake_slink.model.singleton.ExamScheduleDetail
+import com.example.fake_slink.model.singleton.GradeAppealsList
 import com.example.fake_slink.model.singleton.GradeDetail
 import com.example.fake_slink.model.singleton.LearningOutcomes
+import com.example.fake_slink.model.singleton.ReviewFormList
 import com.example.fake_slink.model.singleton.Student
 import com.example.fake_slink.model.singleton.TimeTables
+import com.example.fake_slink.model.singleton.ViewExamSchedule
 import com.example.fake_slink.retrofit.StudentApiService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -42,8 +47,8 @@ import retrofit2.Call
 import retrofit2.Response
 
 class StudentInfoActivity : AppCompatActivity() {
-    val storage = FirebaseStorage.getInstance()
-    val storageReference = storage.reference
+    private val storage = FirebaseStorage.getInstance()
+    private val storageReference = storage.reference
 
     private lateinit var id_num: TextView
     private lateinit var name: TextView
@@ -63,102 +68,87 @@ class StudentInfoActivity : AppCompatActivity() {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
                 avatar_image.setImageURI(it)
-                if (it != null) {
-                    Student.getStudent()?.avatarUrl = it.toString()
-                    val contentResolve = applicationContext.contentResolver
-                    val mimeType = contentResolver.getType(it)
-                    val extension = when (mimeType) {
-                        "image/jpeg" -> ".jpg"
-                        "image/png" -> ".png"
-                        else -> ""
-                    }
+                Student.getStudent()?.avatarUrl = it.toString()
+                val extension: String =
+                    AppHelper.getFileExtension(this@StudentInfoActivity, it) ?: ""
 
-                    val fileReference = storageReference.child(
-                        "avatars/" + Student.getStudent()?.idNum + extension
-                    )
-                    fileReference.putFile(it!!)
-                        .addOnSuccessListener { taskSnapshot ->
-                            fileReference.downloadUrl.addOnSuccessListener { uri ->
-                                Student.getStudent()?.avatarUrl = it.toString()
-                                Log.d("STUDENT_INFO", "Upload success, url image: $uri")
-                                Student.getStudent()?.avatarUrl = uri.toString()
-                                CoroutineScope(Dispatchers.IO).launch {
-                                    try {
-                                        val sharedPreferences =
-                                            getSharedPreferences("MySharedPref", MODE_PRIVATE)
-                                        val token = sharedPreferences.getString("token", null)
-                                        val authorizationStr = "Bearer $token"
-                                        val uploadAvatarRequest =
-                                            UploadAvatarRequest(uri.toString())
-                                        val apiResponse =
-                                            StudentApiService.studentService.uploadAvatarUrl(
-                                                authorizationStr,
-                                                uploadAvatarRequest
-                                            )
+                val fileReference = storageReference.child(
+                    "avatars/" + Student.getStudent()?.idNum + extension
+                )
+                fileReference.putFile(it!!)
+                    .addOnSuccessListener {
+                        fileReference.downloadUrl.addOnSuccessListener { uri ->
+                            Student.getStudent()?.avatarUrl = it.toString()
+                            Log.d("STUDENT_INFO", "Upload success, url image: $uri")
+                            Student.getStudent()?.avatarUrl = uri.toString()
+                            CoroutineScope(Dispatchers.IO).launch {
+                                try {
+                                    val sharedPreferences =
+                                        getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                                    val token = sharedPreferences.getString("token", null)
+                                    val authorizationStr = "Bearer $token"
+                                    val uploadAvatarRequest =
+                                        UploadAvatarRequest(uri.toString())
+                                    val apiResponse =
+                                        StudentApiService.studentService.uploadAvatarUrl(
+                                            authorizationStr,
+                                            uploadAvatarRequest
+                                        )
 
-                                        if (apiResponse.code == 200) {
-                                            if (apiResponse.result == true) {
-                                                runOnUiThread {
-                                                    Toast.makeText(
-                                                        this@StudentInfoActivity,
-                                                        "Thay đổi ảnh thành công!",
-                                                        Toast.LENGTH_SHORT
-                                                    ).show()
+                                    if (apiResponse.code == 200) {
+                                        if (apiResponse.result) {
+                                            runOnUiThread {
+                                                Toast.makeText(
+                                                    this@StudentInfoActivity,
+                                                    "Thay đổi ảnh thành công!",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
 
-                                                }
-                                            } else {
-                                                runOnUiThread {
-                                                    Toast.makeText(
-                                                        this@StudentInfoActivity,
-                                                        "Upload failed!",
-                                                        Toast.LENGTH_SHORT
-                                                    ).show()
-
-                                                }
                                             }
                                         } else {
                                             runOnUiThread {
                                                 Toast.makeText(
                                                     this@StudentInfoActivity,
-                                                    "Upload failed, apiResponse.code: ${apiResponse.code} !",
+                                                    "Upload failed!",
                                                     Toast.LENGTH_SHORT
                                                 ).show()
 
                                             }
                                         }
-                                    } catch (e: Exception) {
-                                        val errorMessage = e.message
-                                        Log.e("STUDENT_INFO", errorMessage.toString())
+                                    } else {
                                         runOnUiThread {
                                             Toast.makeText(
                                                 this@StudentInfoActivity,
-                                                "Có lỗi xảy ra: $errorMessage !",
+                                                "Upload failed, apiResponse.code: ${apiResponse.code} !",
                                                 Toast.LENGTH_SHORT
                                             ).show()
 
                                         }
                                     }
+                                } catch (e: Exception) {
+                                    val errorMessage = e.message
+                                    Log.e("STUDENT_INFO", errorMessage.toString())
+                                    runOnUiThread {
+                                        Toast.makeText(
+                                            this@StudentInfoActivity,
+                                            "Có lỗi xảy ra: $errorMessage !",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+
+                                    }
                                 }
                             }
                         }
-                        .addOnFailureListener { e ->
-                            runOnUiThread {
-                                Toast.makeText(
-                                    this@StudentInfoActivity,
-                                    "Upload failed: ${e.message}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                } else {
-                    runOnUiThread {
-                        Toast.makeText(
-                            this@StudentInfoActivity,
-                            "Chưa chọn ảnh!",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
-                }
+                    .addOnFailureListener { e ->
+                        runOnUiThread {
+                            Toast.makeText(
+                                this@StudentInfoActivity,
+                                "Upload failed: ${e.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
             }
         }
 
@@ -203,6 +193,10 @@ class StudentInfoActivity : AppCompatActivity() {
         GradeDetail.logout()
         CreditClass.logoutCreditClassResponse()
         ClassSubjectDetails.logout()
+        ExamScheduleDetail.logout()
+        GradeAppealsList.logout()
+        ReviewFormList.logout()
+        ViewExamSchedule.logout()
 
         // chuyen den man hinh Login
         val loginIntent = Intent(this@StudentInfoActivity, LoginActivity::class.java)

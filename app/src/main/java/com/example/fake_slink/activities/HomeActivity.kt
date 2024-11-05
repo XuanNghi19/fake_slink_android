@@ -51,6 +51,9 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var tin_tuc: ImageView
     private lateinit var ket_qua_hoc_tap: ImageView
     private lateinit var lop_tin_chi: ImageView
+    private lateinit var xem_lich_thi: ImageView
+    private lateinit var tien_ich: ImageView
+    private lateinit var hoc_tap: ImageView
     private var isOpen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,12 +75,25 @@ class HomeActivity : AppCompatActivity() {
         tin_tuc = findViewById(R.id.tin_tuc)
         ket_qua_hoc_tap = findViewById(R.id.ket_qua_hoc_tap)
         lop_tin_chi = findViewById(R.id.lop_tin_chi)
+        xem_lich_thi = findViewById(R.id.xem_lich_thi)
+        tien_ich = findViewById(R.id.tien_ich)
+        hoc_tap = findViewById(R.id.hoc_tap)
 
+
+        tien_ich.setOnClickListener {
+            tienIch()
+        }
+        hoc_tap.setOnClickListener {
+            hocTap()
+        }
         thoi_khoa_bieu.setOnClickListener {
             thoiKhoaBieu()
         }
         lop_tin_chi.setOnClickListener {
             lop_tin_chi()
+        }
+        xem_lich_thi.setOnClickListener {
+            xemLichThi()
         }
         ket_qua_hoc_tap.setOnClickListener {
             ket_qua_hoc_tap()
@@ -109,6 +125,18 @@ class HomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    private fun tienIch() {
+        startActivity(Intent(this@HomeActivity, UtilitiesActivity::class.java))
+    }
+
+    private fun hocTap() {
+        startActivity(Intent(this@HomeActivity, StudyCornerActivity::class.java))
+    }
+
+    private fun xemLichThi() {
+        startActivity(Intent(this@HomeActivity, ExamScheduleActivity::class.java))
     }
 
     override fun onResume() {

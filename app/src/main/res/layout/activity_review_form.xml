@@ -53,163 +53,343 @@
         app:layout_constraintStart_toStartOf="@+id/header"
         app:layout_constraintTop_toTopOf="@+id/header" />
 
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter_semi_bold"
-        android:text="THÔNG TIN NGƯỜI TẠO"
-        android:textAllCaps="true"
-        android:textColor="@color/gray_text"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_1"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="10dp"
-        app:cardElevation="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info">
+        app:layout_constraintTop_toBottomOf="@+id/header">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/inter_regular"
-                android:text="Họ và tên"
-                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="THÔNG TIN NGƯỜI TẠO"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_text"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/diem_tkhs4"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="Họ và tên"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Phạm Xuân Nghị"
+                        android:textColor="@color/gray_text"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/space_side_2_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.7dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="Mã sinh viên"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/space_side_2_1" />
+
+                    <TextView
+                        android:id="@+id/ma_sv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="D21CNDPT001"
+                        android:textColor="@color/gray_text"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/space_side_2_1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_hoc_phan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:hint="Học phần"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_1">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_hoc_phan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:fontFamily="@font/inter_medium"
+                    android:padding="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ProgressBar
+                android:id="@+id/loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:fontFamily="@font/inter_medium"
-                android:text="Phạm Xuân Nghị"
-                android:textColor="@color/gray_text"
-                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_1" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="NỘI DUNG THẮC MẮC"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_text"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_1" />
+
+            <EditText
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_background"
+                android:gravity="top|start"
+                android:minLines="9"
+                android:overScrollMode="always"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/content" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layout_file"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/message">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Tệp đính kèm"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/upload"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardElevation="0dp">
+
+                    <ImageButton
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="top|center"
+                        android:background="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/up_file" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/tai_len"
+                        android:textColor="@color/blue_text"
+                        android:textSize="14sp" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/upload_file"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="60dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="1dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center|start"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/icons_file" />
+
+                    <TextView
+                        android:id="@+id/name_file"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="20dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/inter_regular"
+                        android:maxLines="1"
+                        android:text="Đơn phúc khảo.doc"
+                        android:textColor="@color/gray_text"
+                        android:textSize="13sp" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/upload_pdf_file"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="60dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="1dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center|start"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/icon_file_pdf" />
+
+                    <TextView
+                        android:id="@+id/name_file_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="20dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/inter_regular"
+                        android:maxLines="1"
+                        android:text="Đơn phúc khảo.pdf"
+                        android:textColor="@color/gray_text"
+                        android:textSize="13sp" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="120dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="*Chỉ chọn file pdf, docs hoặc image là đơn phúc khảo"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/send"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/red1"
+                android:fontFamily="@font/inter_medium"
+                android:text="Gửi đơn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_file" />
 
             <View
-                android:id="@+id/space_side_2_1"
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:layout_gravity="bottom"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/diem_tkhs4" />
+                app:layout_constraintTop_toBottomOf="@+id/send" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/inter_regular"
-                android:text="Mã sinh viên"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/space_side_2_1" />
-
-            <TextView
-                android:id="@+id/diem_tkhs10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="15dp"
-                android:fontFamily="@font/inter_medium"
-                android:text="B21DCPT168"
-                android:textColor="@color/gray_text"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/space_side_2_1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter_semi_bold"
-        android:text="NỘI DUNG THẮC MẮC"
-        android:textAllCaps="true"
-        android:textColor="@color/gray_text"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_1" />
-
-    <EditText
-        android:id="@+id/message"
+    </ScrollView>
+    <ImageView
+        android:id="@+id/coating"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:gravity="top|start"
-        android:minLines="9"
-        android:overScrollMode="always"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:background="@color/coating"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="0dp"
-        android:layout_marginHorizontal="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/message"
+        app:layout_constraintBaseline_toBottomOf="@+id/header" />
+    <ProgressBar
+        android:id="@+id/loading_send"
+        android:visibility="gone"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tệp đính kèm" 
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/inter_medium"
-            android:textSize="14sp"
-            android:layout_gravity="top|center"/>
-        <ImageButton
-            android:id="@+id/img_upload"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/up_file"
-            android:layout_gravity="top|center"
-            android:layout_marginTop="50dp"/>
-        <TextView
-            android:id="@+id/txt_upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tai_len"
-            android:fontFamily="@font/inter_regular"
-            android:layout_gravity="top|center"
-            android:textSize="14sp"
-            android:textColor="@color/blue_text"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="20dp" />
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:progressTint="@color/white"
+        android:indeterminateTint="@color/white"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

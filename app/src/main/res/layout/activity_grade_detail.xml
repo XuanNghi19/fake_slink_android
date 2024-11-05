@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
         android:fontFamily="@font/inter_bold"
-        android:text="Kết quả học tập"
+        android:text="Chi tiết kết quả học tập"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/header"
@@ -335,6 +335,7 @@
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.MaterialComponents.Button"
+        android:id="@+id/add_review"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingVertical="12dp"

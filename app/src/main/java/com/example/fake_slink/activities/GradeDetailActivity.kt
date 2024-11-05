@@ -1,7 +1,9 @@
 package com.example.fake_slink.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -10,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.fake_slink.R
 import com.example.fake_slink.helpers.AppHelper
 import com.example.fake_slink.model.singleton.GradeDetail
+import com.google.android.material.button.MaterialButton
+import java.util.Date
 
 class GradeDetailActivity : AppCompatActivity() {
     private val TAG = "GradeDetail"
@@ -22,6 +26,7 @@ class GradeDetailActivity : AppCompatActivity() {
     private lateinit var diem_tkhs4: TextView
     private lateinit var diem_tkhs10: TextView
     private lateinit var diem_tkhc: TextView
+    private lateinit var add_review: MaterialButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,12 +41,15 @@ class GradeDetailActivity : AppCompatActivity() {
         diem_tkhs4 = findViewById(R.id.diem_tkhs4)
         diem_tkhs10 = findViewById(R.id.diem_tkhs10)
         diem_tkhc = findViewById(R.id.diem_tkhc)
+        add_review = findViewById(R.id.add_review)
 
         back.setOnClickListener {
             back()
         }
         loadData()
-
+        add_review.setOnClickListener {
+            add_review()
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -56,7 +64,7 @@ class GradeDetailActivity : AppCompatActivity() {
             diem_th.text = it.diemTH.toString()
             diem_kt.text = it.diemKT.toString()
             diem_ck.text = it.diemCK.toString()
-            if(it.status.equals("Đã hoàn thành môn học")) {
+            if (it.status == "Đã hoàn thành môn học") {
                 diem_tkhs4.text = AppHelper.convertScoreToGradeNum(it.diemTK)
                 diem_tkhs10.text = it.diemTK.toString()
                 diem_tkhc.text = AppHelper.convertScoreToGrade(it.diemTK)
@@ -66,5 +74,28 @@ class GradeDetailActivity : AppCompatActivity() {
 
     private fun back() {
         finish()
+    }
+
+    private fun add_review() {
+        val appealsDateline = GradeDetail.get()?.appealsDateline
+        if(appealsDateline != null) {
+            if(appealsDateline.after(Date()) || appealsDateline == Date()) {
+                val reviewFormIntent = Intent(this@GradeDetailActivity, ReviewFormActivity::class.java)
+                reviewFormIntent.putExtra("fromGradeDetail", true)
+                startActivity(reviewFormIntent)
+            } else {
+                Toast.makeText(
+                    this@GradeDetailActivity,
+                    "Hết thời hạn tạo phiếu phúc khảo cho học phần này!",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        } else {
+            Toast.makeText(
+                this@GradeDetailActivity,
+                "Học phần này không trong thời gian phúc khảo!",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }

@@ -1,19 +1,23 @@
 package com.example.fake_slink.model.response
 
-class GradeResponse {
-    var classSubjectResponse: ClassSubjectResponse? = null
+import java.util.Date
 
-    var diemCC: Float = 0f
+data class GradeResponse (
+    val classSubjectResponse: ClassSubjectResponse,
 
-    var diemBT: Float = 0f
+    val diemCC: Float,
 
-    var diemTH: Float = 0f
+    val diemBT: Float,
 
-    var diemKT: Float = 0f
+    val diemTH: Float,
 
-    var diemCK: Float = 0f
+    val diemKT: Float,
 
-    var diemTK: Float = 0f
+    val diemCK: Float,
 
-    var status: String? = null
-}
+    val diemTK: Float,
+
+    val status: String,
+
+    val appealsDateline: Date
+)

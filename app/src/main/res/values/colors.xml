@@ -15,4 +15,12 @@
     <color name="gray">#D0D0D0</color>
     <color name="gray_text">#858585</color>
     <color name="blue_text">#4894EC</color>
+
+    <color name="SUBMITTED">#80A8FF</color>
+    <color name="IN_PROGRESS">#DB80FF</color>
+    <color name="REVIEWED">#FFC86F</color>
+    <color name="APPROVED">#67FF79</color>
+    <color name="REJECTED">#FF6767</color>
+
+    <color name="coating">#4d000000</color>
 </resources>
