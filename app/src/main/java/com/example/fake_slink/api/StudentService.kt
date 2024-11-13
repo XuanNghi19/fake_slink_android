@@ -1,7 +1,7 @@
 package com.example.fake_slink.api
 
 import com.example.fake_slink.model.response.ApiResponse
-import com.example.fake_slink.model.request.AuthenticationRequest
+import com.example.fake_slink.model.request.AuthenticationWithMobilePhoneRequest
 import com.example.fake_slink.model.request.UpdatePasswordRequest
 import com.example.fake_slink.model.request.UpdateStudentRequest
 import com.example.fake_slink.model.request.UploadAvatarRequest
@@ -17,9 +17,9 @@ import retrofit2.http.PUT
 
 interface StudentService {
     // xác thực sinh viên
-    @POST("students/student_authentication")
-    fun studentAuthentication(
-        @Body authenticationRequest: AuthenticationRequest
+    @POST("students/mobile/student_authentication")
+    fun studentAuthenticationWithMobilePhone(
+        @Body authenticationRequest: AuthenticationWithMobilePhoneRequest,
     ): Call<ApiResponse<AuthenticationResponse>>
 
     // Lấy thông tin chi tiết sinh viên

@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.firebase.storage)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -81,4 +82,5 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.circleImageView)
     implementation(libs.picasso)
+    implementation("com.google.firebase:firebase-messaging-ktx:23.2.1")
 }

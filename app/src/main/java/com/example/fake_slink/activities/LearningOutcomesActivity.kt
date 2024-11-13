@@ -29,6 +29,7 @@ import com.example.fake_slink.retrofit.GradeApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import java.util.Date
 import java.util.concurrent.TimeUnit
@@ -84,20 +85,11 @@ class LearningOutcomesActivity : AppCompatActivity() {
                                 )
                             if (apiResponse.code == 200) {
                                 Log.d(TAG, apiResponse.result.toString())
-                                runOnUiThread {
-                                    LearningOutcomes.login(apiResponse.result)
+                                LearningOutcomes.login(apiResponse.result)
+
+                                withContext(Dispatchers.Main) {
                                     setData()
-                                } ?: run {
-                                    val errorMessage = "No response body"
-                                    Log.e(TAG, errorMessage)
-                                    Toast.makeText(
-                                        this@LearningOutcomesActivity,
-                                        "Có lỗi xảy ra: $errorMessage !",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-
                                 }
-
                             }
                         }
                     } catch (e: Exception) {

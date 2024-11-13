@@ -3,10 +3,10 @@ package com.example.fake_slink.model.singleton
 import com.example.fake_slink.model.response.GradeResponse
 
 object GradeAppealsList {
-    private var gradeResponseList: List<GradeResponse>? = null
+    private var gradeResponseList: MutableList<GradeResponse>? = null
 
     fun login(gradeResponseList: List<GradeResponse>?) {
-        this.gradeResponseList = gradeResponseList
+        this.gradeResponseList = gradeResponseList?.toMutableList()
     }
 
     fun logout() {
@@ -15,5 +15,11 @@ object GradeAppealsList {
 
     fun get() : List<GradeResponse>? {
         return this.gradeResponseList
+    }
+
+    fun add(gradeResponse: GradeResponse) {
+        if(this.gradeResponseList != null) {
+            this.gradeResponseList?.add(gradeResponse)
+        }
     }
 }

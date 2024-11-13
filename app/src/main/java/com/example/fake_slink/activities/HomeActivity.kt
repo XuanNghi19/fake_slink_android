@@ -26,16 +26,24 @@ import com.example.fake_slink.R
 import com.example.fake_slink.adapter.ItemTkbMiniAdapter
 import com.example.fake_slink.model.singleton.Student
 import com.example.fake_slink.model.singleton.TimeTables
+import com.example.fake_slink.model.singleton.ViewExamSchedule
+import com.example.fake_slink.notification.NotificationUtils
+import com.example.fake_slink.retrofit.ExamScheduleApiService
 import com.example.fake_slink.retrofit.TimeTableApiService
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import java.util.concurrent.TimeUnit
 
 class HomeActivity : AppCompatActivity() {
+
+    private val student = Student.getStudent()
+    private val idNum = student?.idNum
+    private val TAG = "HOME"
 
     private lateinit var gpa_text_bar: TextView
     private lateinit var avatar_image: CircleImageView
@@ -54,6 +62,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var xem_lich_thi: ImageView
     private lateinit var tien_ich: ImageView
     private lateinit var hoc_tap: ImageView
+    private lateinit var notification: ImageView
     private var isOpen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,8 +87,10 @@ class HomeActivity : AppCompatActivity() {
         xem_lich_thi = findViewById(R.id.xem_lich_thi)
         tien_ich = findViewById(R.id.tien_ich)
         hoc_tap = findViewById(R.id.hoc_tap)
-
-
+        notification = findViewById(R.id.notification)
+        notification.setOnClickListener {
+            notification()
+        }
         tien_ich.setOnClickListener {
             tienIch()
         }
@@ -118,6 +129,7 @@ class HomeActivity : AppCompatActivity() {
 
         setHeaderInformation()
         getMiniTkb()
+        loadExamSchedule()
         setHomeOnClick()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -139,6 +151,10 @@ class HomeActivity : AppCompatActivity() {
         startActivity(Intent(this@HomeActivity, ExamScheduleActivity::class.java))
     }
 
+    private fun notification() {
+        startActivity(Intent(this@HomeActivity, NotificationActivity::class.java))
+    }
+
     override fun onResume() {
         super.onResume()
         Picasso.get()
@@ -158,13 +174,10 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getMiniTkb() {
-        val student = Student.getStudent()
-        val idNum = student?.idNum
-        val TAG = "HOME"
-        val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-        val token = sharedPreferences.getString("token", null)
-        val authorizationStr = "Bearer $token"
         if (idNum != null) {
+            val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+            val token = sharedPreferences.getString("token", null)
+            val authorizationStr = "Bearer $token"
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     withTimeout(TimeUnit.SECONDS.toMillis(10)) {
@@ -310,6 +323,44 @@ class HomeActivity : AppCompatActivity() {
     private fun tin_tuc() {
         val uri = Uri.parse("https://ptit.edu.vn/giao-vu")
         startActivity(Intent(Intent.ACTION_VIEW, uri))
+    }
+
+    private fun loadExamSchedule() {
+        if(idNum != null) {
+            val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+            val token = sharedPreferences.getString("token", null)
+            val authorizationStr = "Bearer $token"
+            CoroutineScope(Dispatchers.IO).launch {
+                withTimeout(TimeUnit.SECONDS.toMillis(10)) {
+                    val apiResponse =
+                        ExamScheduleApiService.examScheduleService.getAllExamScheduleByStudent(
+                            authorizationStr,
+                            idNum
+                        )
+                    if (apiResponse.code == 200) {
+                        Log.d(TAG, apiResponse.result.toString())
+                        ViewExamSchedule.login(apiResponse.result)
+
+                        ViewExamSchedule.get()?.examScheduleResponseList?.let {
+                            for(x in it) {
+                                NotificationUtils.createExamScheduleNotification(this@HomeActivity, x)
+                            }
+                        }
+
+                    } else {
+                        Log.e(TAG, "Có lỗi xảy ra: ${apiResponse.code}")
+                        runOnUiThread {
+                            Toast.makeText(
+                                this@HomeActivity,
+                                "Có lỗi xảy ra: ${apiResponse.code}!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

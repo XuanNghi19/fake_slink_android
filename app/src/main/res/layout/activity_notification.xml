@@ -52,9 +52,10 @@
         app:layout_constraintStart_toStartOf="@+id/header"
         app:layout_constraintTop_toTopOf="@+id/header" />
     <ImageButton
+        android:id="@+id/checkAll"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:background="@null"
+        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/check_all"
         android:layout_marginEnd="25dp"

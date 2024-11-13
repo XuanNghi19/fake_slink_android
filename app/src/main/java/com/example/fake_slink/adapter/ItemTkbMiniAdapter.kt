@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.example.fake_slink.R
 import com.example.fake_slink.helpers.AppHelper
 import com.example.fake_slink.model.response.TimeTableResponse
+import com.example.fake_slink.notification.NotificationUtils
 import java.text.SimpleDateFormat
 
 class ItemTkbMiniAdapter(
@@ -62,7 +63,7 @@ class ItemTkbMiniAdapter(
     private fun getNext7LearningDays(timetableList: List<TimeTableResponse>): List<DateTimeTablePair> {
         val dateTimeTablePair = mutableListOf<DateTimeTablePair>()
 
-        // số tuần cần duyet
+        // số tuần cần duyệt
         var weekToAdd = 0
 
         while (dateTimeTablePair.size < 7) {
@@ -73,6 +74,9 @@ class ItemTkbMiniAdapter(
                 if(dateTimeTablePair.size < 7 &&
                     !dateTimeTablePair.any{it.dateStr == dateStr}) {
                     dateTimeTablePair.add(pair)
+
+                    val calendar = AppHelper.getSpecificDateByCalendar(timeTable.dayOfWeek, weekToAdd, timeTable.startTime)
+                    NotificationUtils.createClassScheduleNotification(context, calendar, timeTable)
                 }
             }
             weekToAdd++

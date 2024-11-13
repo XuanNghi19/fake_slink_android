@@ -71,7 +71,7 @@
                 android:paddingHorizontal="20dp"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/title_notification"
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nhắc lịch thi học phần Tin học cơ sở 1"
@@ -89,9 +89,9 @@
                     android:layout_marginEnd="100dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title_notification"/>
+                    app:layout_constraintTop_toBottomOf="@+id/title"/>
                 <TextView
-                    android:id="@+id/notification_date"
+                    android:id="@+id/timeDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="15:30 27/04/2022"
@@ -102,14 +102,14 @@
                     android:fontFamily="@font/inter_regular"
                     app:layout_constraintTop_toBottomOf="@+id/space_side" />
                 <TextView
-                    android:id="@+id/content_notification"
+                    android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Bạn có lịch thi của học phần Tin học cơ sở 1, tại phòng 305-A2, từ 14:00 đến 15:00 ngày 07/05/2022."
                     android:textSize="13sp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/inter_regular"
-                    app:layout_constraintTop_toBottomOf="@+id/notification_date" />
+                    app:layout_constraintTop_toBottomOf="@+id/timeDate" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>
